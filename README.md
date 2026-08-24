@@ -4,29 +4,29 @@
 
 ## PaySim Fraud Detection & Transaction Risk Analysis
 
-1. Project Overview
+1. [Project Overview](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-project-overview)
 
-2. Business Problem
+2. [Business Problem](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-business-problem)
 
-3. Objectives
+3. [Objectives](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-project-objectives)
 
-4. Dataset
+4. [Dataset](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-dataset)
 
-5. Tools & Technologies
+5. [Tools & Technologies](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#%EF%B8%8F-tools--technologies)
 
-6. Analytical Approach
+6. [Analytical Approach](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-analytical-approach)
 
-7. Key Findings
+7. [Key Findings](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-key-findings)
 
-8. Power BI Dashboard
+8. [Power BI Dashboard](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-power-bi-dashboard)
 
-9. Business Recommendations
+9. [Business Recommendations](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#-business-recommendations)
 
-10. Project Structure
+10. [Project Structure](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#10-project-structure)
 
-11. Skills Demonstrated
+11. [Skills Demonstrated](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#11-skills-demonstrated)
 
-12. Conclusion
+12. [Conclusion](https://github.com/GideonAdon/PaySim-Fraud-Detection-Analysis/edit/main/README.md#12-conclusion)
 
 # PaySim Fraud Detection & Transaction Risk Analysis
 
@@ -347,6 +347,37 @@ GROUP BY type
 ORDER BY FraudRate DESC;
 ```
 
+## 10. Project Structure
+
+PaySim-Fraud-Detection/
+
+│
+
+├── SQL/
+
+│   ├── 01_Data_Quality.sql
+
+│   ├── 02_Fraud_Analysis.sql
+
+│   └── 03_Fraud_Detection_Effectiveness.sql
+
+│
+
+├── PowerBI/
+
+│   └── PaySim_Fraud_Detection.pbix
+
+│
+
+├── Images/
+
+│   └── paysim-dashboard.png
+│
+
+├── README.md
+
+└── LICENSE
+
 ## 11. Skills Demonstrated
 
 This project demonstrates:
@@ -401,3 +432,22 @@ This project demonstrates:
 ## 12. Conclusion
 
 This project demonstrates an end-to-end approach to fraud analytics, combining SQL-based investigation with interactive Power BI visualization. The analysis identified significant fraudulent transaction exposure and highlighted a substantial gap between fraud detection precision and recall within the PaySim dataset.
+
+### 🚀 Project Outcome
+
+This project demonstrates an end-to-end approach to transaction fraud analytics, combining SQL-based investigation with Power BI visualization.
+
+The analysis identified approximately ₦12.06 billion in fraudulent transaction value and revealed a significant gap between the precision and recall of the existing fraud-flagging indicator within the PaySim dataset.
+
+The project demonstrates how transaction-level data can be transformed into actionable insights that support fraud monitoring, risk prioritization and data-driven decision-making.
+
+## 👤 Author
+
+### Gideon Moses Adon
+
+Data Analyst | SQL | Power BI | Excel | Python
+
+
+### 📌 Disclaimer
+
+PaySim is a synthetic financial transaction dataset created for research and analytical purposes. The findings in this project should therefore be interpreted as analytical insights from the dataset rather than evidence of real-world fraud behaviour or performance of an actual financial institution's fraud detection system.
