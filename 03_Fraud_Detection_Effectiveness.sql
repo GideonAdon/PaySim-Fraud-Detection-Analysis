@@ -1,0 +1,232 @@
+/* ============================================================
+   PROJECT: PaySim Fraud Detection & Transaction Risk Analysis
+   FILE: 03_Fraud_Detection_Effectiveness.sql
+   PURPOSE: Evaluate the performance of the isFlaggedFraud
+            indicator against the dataset's fraud label
+   TOOL: Microsoft SQL Server
+   ============================================================ */
+
+
+/* ============================================================
+   1. FRAUD DETECTION CONFUSION MATRIX
+   ============================================================ */
+
+SELECT
+    CASE
+        WHEN isFraud = 1 AND isFlaggedFraud = 1
+            THEN 'True Positive'
+
+        WHEN isFraud = 1 AND isFlaggedFraud = 0
+            THEN 'False Negative'
+
+        WHEN isFraud = 0 AND isFlaggedFraud = 1
+            THEN 'False Positive'
+
+        ELSE 'True Negative'
+    END AS DetectionResult,
+
+    COUNT(*) AS TransactionCount,
+
+    SUM(amount) AS TransactionAmount
+
+FROM PaySim
+
+GROUP BY
+    CASE
+        WHEN isFraud = 1 AND isFlaggedFraud = 1
+            THEN 'True Positive'
+
+        WHEN isFraud = 1 AND isFlaggedFraud = 0
+            THEN 'False Negative'
+
+        WHEN isFraud = 0 AND isFlaggedFraud = 1
+            THEN 'False Positive'
+
+        ELSE 'True Negative'
+    END;
+
+
+/* ============================================================
+   2. FALSE NEGATIVE ANALYSIS
+   ============================================================ */
+
+SELECT
+    COUNT(*) AS FalseNegativeTransactions,
+    SUM(amount) AS FalseNegativeAmount,
+    AVG(amount) AS AverageFalseNegativeAmount
+
+FROM PaySim
+
+WHERE isFraud = 1
+  AND isFlaggedFraud = 0;
+
+
+/* ============================================================
+   3. FALSE POSITIVE ANALYSIS
+   ============================================================ */
+
+SELECT
+    COUNT(*) AS FalsePositiveTransactions,
+    SUM(amount) AS FalsePositiveAmount,
+    AVG(amount) AS AverageFalsePositiveAmount
+
+FROM PaySim
+
+WHERE isFraud = 0
+  AND isFlaggedFraud = 1;
+
+
+/* ============================================================
+   4. FRAUD FLAG PRECISION
+   ============================================================ */
+
+SELECT
+    CAST(
+        SUM(
+            CASE
+                WHEN isFraud = 1
+                 AND isFlaggedFraud = 1
+                THEN 1
+                ELSE 0
+            END
+        ) * 100.0
+        /
+        NULLIF(
+            SUM(
+                CASE
+                    WHEN isFlaggedFraud = 1
+                    THEN 1
+                    ELSE 0
+                END
+            ),
+            0
+        )
+        AS DECIMAL(10,3)
+    ) AS FraudFlagPrecision
+
+FROM PaySim;
+
+
+/* ============================================================
+   5. FRAUD FLAG RECALL
+   ============================================================ */
+
+SELECT
+    CAST(
+        SUM(
+            CASE
+                WHEN isFraud = 1
+                 AND isFlaggedFraud = 1
+                THEN 1
+                ELSE 0
+            END
+        ) * 100.0
+        /
+        NULLIF(
+            SUM(
+                CASE
+                    WHEN isFraud = 1
+                    THEN 1
+                    ELSE 0
+                END
+            ),
+            0
+        )
+        AS DECIMAL(10,3)
+    ) AS FraudFlagRecall
+
+FROM PaySim;
+
+
+/* ============================================================
+   6. PERCENTAGE OF FRAUD AMOUNT MISSED
+   ============================================================ */
+
+SELECT
+
+    SUM(
+        CASE
+            WHEN isFraud = 1
+             AND isFlaggedFraud = 0
+            THEN amount
+            ELSE 0
+        END
+    ) AS MissedFraudAmount,
+
+    SUM(
+        CASE
+            WHEN isFraud = 1
+            THEN amount
+            ELSE 0
+        END
+    ) AS TotalFraudAmount,
+
+    CAST(
+        SUM(
+            CASE
+                WHEN isFraud = 1
+                 AND isFlaggedFraud = 0
+                THEN amount
+                ELSE 0
+            END
+        ) * 100.0
+        /
+        NULLIF(
+            SUM(
+                CASE
+                    WHEN isFraud = 1
+                    THEN amount
+                    ELSE 0
+                END
+            ),
+            0
+        )
+        AS DECIMAL(10,2)
+    ) AS PercentageFraudAmountMissed
+
+FROM PaySim;
+
+
+/* ============================================================
+   7. FRAUD DETECTION PERFORMANCE SUMMARY
+   ============================================================ */
+
+SELECT
+
+    SUM(
+        CASE
+            WHEN isFraud = 1
+             AND isFlaggedFraud = 1
+            THEN 1
+            ELSE 0
+        END
+    ) AS TruePositives,
+
+    SUM(
+        CASE
+            WHEN isFraud = 1
+             AND isFlaggedFraud = 0
+            THEN 1
+            ELSE 0
+        END
+    ) AS FalseNegatives,
+
+    SUM(
+        CASE
+            WHEN isFraud = 0
+             AND isFlaggedFraud = 1
+            THEN 1
+            ELSE 0
+        END
+    ) AS FalsePositives,
+
+    SUM(
+        CASE
+            WHEN isFraud = 0
+             AND isFlaggedFraud = 0
+            THEN 1
+            ELSE 0
+        END
+    ) AS TrueNegatives
+
+FROM PaySim;
