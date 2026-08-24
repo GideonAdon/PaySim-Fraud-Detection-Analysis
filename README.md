@@ -345,3 +345,59 @@ SELECT
 FROM PaySim
 GROUP BY type
 ORDER BY FraudRate DESC;
+```
+
+## 11. Skills Demonstrated
+
+This project demonstrates:
+
+### SQL
+
+- SELECT
+
+- CASE
+
+- GROUP BY
+
+- HAVING
+
+- Aggregate functions
+
+- Conditional aggregation
+
+- CTE-style analytical thinking
+
+- Fraud detection metrics
+
+### Power BI
+
+- Data modelling
+
+- DAX
+
+- KPI development
+
+- Interactive slicers
+
+- Data visualization
+
+- Dashboard design
+
+## Analytics
+
+- Fraud analysis
+
+- Risk analysis
+
+- Trend analysis
+
+- Account-level investigation
+
+- Precision/recall interpretation
+
+- Business recommendations
+
+
+## 12. Conclusion
+
+This project demonstrates an end-to-end approach to fraud analytics, combining SQL-based investigation with interactive Power BI visualization. The analysis identified significant fraudulent transaction exposure and highlighted a substantial gap between fraud detection precision and recall within the PaySim dataset.
